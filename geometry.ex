@@ -46,6 +46,7 @@ defmodule Geometry do
       IO.puts(n)
      end
   end
+
   defmodule PrintLinearlyFromNTo1 do 
     def lean(0), do: :ok
     def lean(n) do 
@@ -53,11 +54,18 @@ defmodule Geometry do
       lean(n-1)
     end
   end
+  
   defmodule Factorial do 
     defp factA(0, sum), do: sum 
     defp factA(number, sum ), do: factA(number-1, sum * number)
     def  factTailOp(number), do: factA(number, 1)
     def  factNonTailOp(1), do: 1
     def  factNonTailOp(number), do: number * factNonTailOp(number-1)
+  end
+
+  defmodule ReverseList do 
+    defp reverse([], acc),           do: acc
+    defp reverse([head | tail], acc), do: reverse(tail, [head | acc])
+    def  reverse(list),              do: reverse(list, [])
   end  
 end
