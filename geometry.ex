@@ -68,4 +68,8 @@ defmodule Geometry do
     defp reverse([head | tail], acc), do: reverse(tail, [head | acc])
     def  reverse(list),              do: reverse(list, [])
   end  
+
+  defmodule Palindrome do 
+    def isPalindrome?(value), do: value == String.reverse(value)
+  end
 end
