@@ -79,4 +79,11 @@ defmodule Geometry do
     def fib(n), do: fib(n-1)+fib(n-2)
   end
 
+  defmodule TwoSum do 
+    def two_sum(nums, target) do
+      n = Enum.with_index(nums)
+      r = for {x, xi} <- n, {y, yi} <- n -- [{x, xi}], x + y == target, do: [xi, yi]
+      hd(r)
+    end
+  end
 end
