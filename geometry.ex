@@ -86,4 +86,22 @@ defmodule Geometry do
       hd(r)
     end
   end
+
+  defmodule  TwoSumTwo do
+    
+    def two_sum(nums, target) do 
+      asc = Enum.with_index(nums, 1)
+      dsc = Enum.reverse(asc)
+      solve(asc, dsc, target)
+    end
+
+    defp solve([{x, _}  | acs ],    [{y, _}  | _] = dsc, t) when x + y < t, do: solve(acs, dsc, t) 
+    defp solve([{x, _}  | _] = acs, [{y, _}  | dsc],     t) when x + y > t, do: solve(acs, dsc, t)
+    defp solve([{_, xi} | _],       [{_, yi} | _],       _),                do: [xi, yi]
+
+  end
+
+
+
+
 end
