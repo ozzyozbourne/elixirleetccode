@@ -31,55 +31,58 @@ defmodule Geometry do
     def circumference(r), do: 2 * @pi * r
   end
 
-  defmodule Printname do 
+  defmodule Printname do
     def printname(_name, 0), do: :ok
-    def printname(name, n) do 
+
+    def printname(name, n) do
       IO.puts(name)
-      printname(name, n-1)
-    end 
+      printname(name, n - 1)
+    end
   end
 
   defmodule PrintLearnlyFrom1ToN do
-     def lean(0), do: :ok
-     def lean(n) do 
-      lean(n-1)
-      IO.puts(n)
-     end
-  end
-
-  defmodule PrintLinearlyFromNTo1 do 
     def lean(0), do: :ok
-    def lean(n) do 
+
+    def lean(n) do
+      lean(n - 1)
       IO.puts(n)
-      lean(n-1)
     end
   end
-  
-  defmodule Factorial do 
-    defp factA(0, sum), do: sum 
-    defp factA(number, sum ), do: factA(number-1, sum * number)
-    def  factTailOp(number), do: factA(number, 1)
-    def  factNonTailOp(1), do: 1
-    def  factNonTailOp(number), do: number * factNonTailOp(number-1)
+
+  defmodule PrintLinearlyFromNTo1 do
+    def lean(0), do: :ok
+
+    def lean(n) do
+      IO.puts(n)
+      lean(n - 1)
+    end
   end
 
-  defmodule ReverseList do 
-    defp reverse([], acc),           do: acc
-    defp reverse([head | tail], acc), do: reverse(tail, [head | acc])
-    def  reverse(list),              do: reverse(list, [])
-  end  
+  defmodule Factorial do
+    defp factA(0, sum), do: sum
+    defp factA(number, sum), do: factA(number - 1, sum * number)
+    def factTailOp(number), do: factA(number, 1)
+    def factNonTailOp(1), do: 1
+    def factNonTailOp(number), do: number * factNonTailOp(number - 1)
+  end
 
-  defmodule Palindrome do 
+  defmodule ReverseList do
+    defp reverse([], acc), do: acc
+    defp reverse([head | tail], acc), do: reverse(tail, [head | acc])
+    def reverse(list), do: reverse(list, [])
+  end
+
+  defmodule Palindrome do
     def isPalindrome?(value), do: value == String.reverse(value)
   end
-  
-  defmodule Fibonacci do 
+
+  defmodule Fibonacci do
     def fib(0), do: 0
     def fib(1), do: 1
-    def fib(n), do: fib(n-1)+fib(n-2)
+    def fib(n), do: fib(n - 1) + fib(n - 2)
   end
 
-  defmodule TwoSum do 
+  defmodule TwoSum do
     def two_sum(nums, target) do
       n = Enum.with_index(nums)
       r = for {x, xi} <- n, {y, yi} <- n -- [{x, xi}], x + y == target, do: [xi, yi]
@@ -87,21 +90,38 @@ defmodule Geometry do
     end
   end
 
-  defmodule  TwoSumTwo do
-    
-    def two_sum(nums, target) do 
+  defmodule TwoSumTwo do
+    def two_sum(nums, target) do
       asc = Enum.with_index(nums, 1)
       dsc = Enum.reverse(asc)
       solve(asc, dsc, target)
     end
 
-    defp solve([{x, _}  | acs ],    [{y, _}  | _] = dsc, t) when x + y < t, do: solve(acs, dsc, t) 
-    defp solve([{x, _}  | _] = acs, [{y, _}  | dsc],     t) when x + y > t, do: solve(acs, dsc, t)
-    defp solve([{_, xi} | _],       [{_, yi} | _],       _),                do: [xi, yi]
-
+    defp solve([{x, _} | acs], [{y, _} | _] = dsc, t) when x + y < t, do: solve(acs, dsc, t)
+    defp solve([{x, _} | _] = acs, [{y, _} | dsc], t) when x + y > t, do: solve(acs, dsc, t)
+    defp solve([{_, xi} | _], [{_, yi} | _], _), do: [xi, yi]
   end
 
+  defmodule FourSumTwo do
+    def print do
+      # Initialize sum_count as an empty map
+      sum_count = %{}
 
+      Enum.each([1, 2], fn x ->
+        Enum.each([-2, -1], fn y ->
+          sum_count = Map.put(sum_count, x, y)
+        end)
+      end)
 
+      IO.inspect(sum_count)
+    end
+  end
+  
+  defmodule MissingNumber do 
+    def find(nums) do 
+    a = for x <- 0..length(nums), do: x
+    Enum.sum(a) - Enum.sum(nums)
+    end
+  end
 
 end
