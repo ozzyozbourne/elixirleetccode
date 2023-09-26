@@ -124,4 +124,12 @@ defmodule Geometry do
     end
   end
 
+  defmodule MaxConsecutive do
+    @spec find_max_consecutive_ones(nums :: [integer]) :: integer
+    def find_max_consecutive_ones(nums),                do: find_max_consecutive_ones(nums, 0, 0)
+    def find_max_consecutive_ones([0 | t], count, max), do: find_max_consecutive_ones(t, 0, max)
+    def find_max_consecutive_ones([1 | t], count, max), do: find_max_consecutive_ones(t, count+1, if(count+1 > max, do: count+1, else: max))
+    def find_max_consecutive_ones([], _, max),          do: max
+  end
+
 end
