@@ -132,4 +132,18 @@ defmodule Geometry do
     def find_max_consecutive_ones([], _, max),          do: max
   end
 
+  defmodule Solution do
+    @spec single_number(nums :: [integer]) :: integer
+    def single_number(nums),  do: List.foldl(nums, 0, fn x, acc -> Bitwise.bxor(x, acc) end)
+  end 
+  
+  defmodule SubSeq do 
+    def generate([]), do: [[]]
+    def generate([h|t]) do 
+      noh = generate(t)
+      wh = for x <- noh, do: [h|x]
+      wh ++ noh
+    end
+  end
+
 end
