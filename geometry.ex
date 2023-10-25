@@ -146,4 +146,16 @@ defmodule Geometry do
     end
   end
 
+  defmodule SubSeqThatSatisfyTarget do
+  @spec num_subseq(nums :: [integer], target :: integer) :: integer
+    def num_subseq(nums, target), do: for i <- SubSeq.generate(nums), i != [] && (List.first(i, 0) + List.last(i, 0) <= target), do: i
+  end
+  
+  defmodule Permutation do 
+    @spec permute(nums :: [integer]) :: [[integer]]
+    def permute([]),   do: [[]] 
+    def permute(nums), do: for h <- nums, t <- permute(nums -- [h]), do: [h | t]
+  end
+
+
 end
